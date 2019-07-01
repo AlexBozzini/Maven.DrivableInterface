@@ -6,19 +6,19 @@ import static oracle.jrockit.jfr.events.Bits.intValue;
 
 public class HondaCivic extends Car {
     private Double milesTraveled;
-    private Integer numberOfOilChanges;
     private Double topSpeed;
+    private Double lastOilChange;
 
-    public HondaCivic(Double milesTraveled, Integer numberOfOilChanges, Double topSpeed){
+    public HondaCivic(Double milesTraveled, Double topSpeed, Double lastOilChange){
         this.milesTraveled = milesTraveled;
-        this.numberOfOilChanges = numberOfOilChanges;
         this.topSpeed = topSpeed;
+        this.lastOilChange = lastOilChange;
     }
 
     public HondaCivic(){
         this.milesTraveled = 0.0;
-        this.numberOfOilChanges = 0;
         this.topSpeed = 70.0;
+        this.lastOilChange = 0.0;
     }
     /**
      * A civic should need an oil change every
@@ -30,7 +30,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public Boolean needsOilChange() {
-        return this.numberOfOilChanges / this.milesTraveled <= (double) (1 / 50000);
+        return (this.milesTraveled - this.lastOilChange) >= 50000;
     }
 
     /**
@@ -42,7 +42,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public void changeOil() {
-        this.numberOfOilChanges += 1;
+        this.lastOilChange = milesTraveled;
     }
 
     /**
