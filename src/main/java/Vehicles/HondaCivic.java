@@ -25,7 +25,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public Boolean needsOilChange() {
-        return null;
+        return this.numberOfOilChanges / this.milesTraveled < 1 / 50000;
     }
 
     /**
