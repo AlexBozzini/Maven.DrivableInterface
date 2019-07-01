@@ -51,6 +51,11 @@ public class MountainBike extends Bike {
     @Override
     public Integer transport(Double distance) {
         this.milesTraveled += distance;
+        Double tirePressureDistance = distance;
+        while (tirePressureDistance >= 30 && this.tirePressure > 20){
+            tirePressure -= 1;
+            tirePressureDistance -= 30;
+        }
         return intValue(distance/this.topSpeed) * 60 * 60;
     }
 
