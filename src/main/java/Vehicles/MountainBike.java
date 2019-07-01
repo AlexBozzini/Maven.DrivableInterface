@@ -2,7 +2,25 @@ package Vehicles;
 
 import Driving.Bike;
 
+import static oracle.jrockit.jfr.events.Bits.intValue;
+
 public class MountainBike extends Bike {
+    private Double topSpeed;
+    private Double milesTraveled;
+    private Integer tirePressure;
+
+    public MountainBike(Double topSpeed, Double milesTraveled, Integer tirePressure){
+        this.topSpeed = topSpeed;
+        this.milesTraveled = milesTraveled;
+        this.tirePressure = tirePressure;
+    }
+
+    public MountainBike(){
+        this.topSpeed = 28.5;
+        this.milesTraveled = 0.0;
+        this.tirePressure = 30;
+    }
+
     /**
      * The top speed of a mountain bike should be 28.5
      * but for every 1 PSI under the recommended tire
@@ -13,7 +31,7 @@ public class MountainBike extends Bike {
      */
     @Override
     public Double getTopSpeed() {
-        return null;
+        return this.topSpeed - (Math.abs(30.0 - tirePressure));
     }
 
 
@@ -32,7 +50,8 @@ public class MountainBike extends Bike {
      */
     @Override
     public Integer transport(Double distance) {
-        return null;
+        this.milesTraveled += distance;
+        return intValue(distance/this.topSpeed) * 60 * 60;
     }
 
     /**
@@ -43,7 +62,7 @@ public class MountainBike extends Bike {
      */
     @Override
     public Integer getTirePressure() {
-        return null;
+        return this.tirePressure;
     }
 
     /**
@@ -51,7 +70,7 @@ public class MountainBike extends Bike {
      */
     @Override
     public void inflateTires() {
-
+        this.tirePressure = 30;
     }
 
     /**
@@ -60,6 +79,6 @@ public class MountainBike extends Bike {
      */
     @Override
     public Integer recommendedTirePressure() {
-        return null;
+        return 30;
     }
 }
