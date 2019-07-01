@@ -2,18 +2,23 @@ package Vehicles;
 
 import Driving.Car;
 
+import static oracle.jrockit.jfr.events.Bits.intValue;
+
 public class HondaCivic extends Car {
     private Double milesTraveled;
     private Integer numberOfOilChanges;
+    private Double topSpeed;
 
-    public HondaCivic(Double milesTraveled, Integer numberOfOilChanges){
+    public HondaCivic(Double milesTraveled, Integer numberOfOilChanges, Double topSpeed){
         this.milesTraveled = milesTraveled;
         this.numberOfOilChanges = numberOfOilChanges;
+        this.topSpeed = topSpeed;
     }
 
     public HondaCivic(){
         this.milesTraveled = 0.0;
         this.numberOfOilChanges = 0;
+        this.topSpeed = 70.0;
     }
     /**
      * A civic should need an oil change every
@@ -25,7 +30,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public Boolean needsOilChange() {
-        return this.numberOfOilChanges / this.milesTraveled < 1 / 50000;
+        return this.numberOfOilChanges / this.milesTraveled <= (double) (1 / 50000);
     }
 
     /**
@@ -37,7 +42,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public void changeOil() {
-
+        this.numberOfOilChanges += 1;
     }
 
     /**
@@ -49,7 +54,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public Boolean checkEngineLight() {
-        return null;
+        return this.needsOilChange();
     }
 
     /**
@@ -62,7 +67,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public Double getDistanceTraveled() {
-        return null;
+        return this.milesTraveled;
     }
 
     /**
@@ -71,7 +76,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public Double getTopSpeed() {
-        return null;
+        return this.topSpeed;
     }
 
     /**
@@ -84,6 +89,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public Integer transport(Double distance) {
-        return null;
+        this.milesTraveled += distance;
+        return intValue(distance/this.topSpeed) * 60 * 60;
     }
 }
