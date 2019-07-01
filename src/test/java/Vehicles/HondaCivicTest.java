@@ -52,7 +52,7 @@ public class HondaCivicTest {
         hondaCivic.transport(51000.0);
         // Act
         hondaCivic.changeOil();
-        hondaCivic.transport(490000.0);
+        hondaCivic.transport(49000.0);
         Boolean oilNeedsChanging49kMiles = hondaCivic.needsOilChange();
 
         // Assert
@@ -69,7 +69,7 @@ public class HondaCivicTest {
         Boolean oilNeedsChanging50kMiles = hondaCivic.needsOilChange();
 
         // Assert
-        assertFalse(oilNeedsChanging50kMiles);
+        assertTrue(oilNeedsChanging50kMiles);
     }
 
     @Test
