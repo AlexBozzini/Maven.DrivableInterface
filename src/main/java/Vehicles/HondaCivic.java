@@ -3,6 +3,18 @@ package Vehicles;
 import Driving.Car;
 
 public class HondaCivic extends Car {
+    private Double milesTraveled;
+    private Integer numberOfOilChanges;
+
+    public HondaCivic(Double milesTraveled, Integer numberOfOilChanges){
+        this.milesTraveled = milesTraveled;
+        this.numberOfOilChanges = numberOfOilChanges;
+    }
+
+    public HondaCivic(){
+        this.milesTraveled = 0.0;
+        this.numberOfOilChanges = 0;
+    }
     /**
      * A civic should need an oil change every
      * 50,000 miles traveled. Once the oil is
